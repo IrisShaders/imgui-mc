@@ -5,8 +5,6 @@ import com.mojang.blaze3d.opengl.GlConst;
 import com.mojang.blaze3d.opengl.GlDevice;
 import com.mojang.blaze3d.opengl.GlStateManager;
 import com.mojang.blaze3d.opengl.GlTexture;
-//?} else {
-
 //?}
 import com.mojang.blaze3d.systems.RenderSystem;
 import imgui.ImGui;
