@@ -10,7 +10,7 @@
   "contact": {
     "sources": "https://github.com/IrisShaders/imgui-mc"
   },
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/template/icon.png",
   "environment": "*",
   "custom": {
