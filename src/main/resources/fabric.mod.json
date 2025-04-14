@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "This library adds support for the latest ImGui in a compatible way, while managing all the details of contexts for you.",
+  "authors": [
+    "IMS212"
+  ],
+  "contact": {
+    "sources": "https://github.com/IrisShaders/imgui-mc"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/template/icon.png",
+  "environment": "*",
+  "custom": {
+    "modmenu": {
+      "badges": [
+        "library"
+      ]
+    }
+  },
+  "mixins": [
+    {
+      "config": "imgui-for-mc.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.15",
+    "minecraft": "${mcdep}"
+  }
+}

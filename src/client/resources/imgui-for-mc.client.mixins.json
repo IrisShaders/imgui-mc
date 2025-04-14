@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "net.irisshaders.imgui.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"RendererInitMixin",
+		"MouseHandlingMixin",
+		"DrawMixin",
+		"KeyboardHandlingMixin",
+		"WindowMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
