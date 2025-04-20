@@ -47,8 +47,8 @@ dependencies {
     minecraft("com.mojang:minecraft:$mcVersion")
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${deps["fabric_loader"]}")
-    include("io.github.spair:imgui-java-binding:1.90.9")
-    implementation("io.github.spair:imgui-java-binding:1.90.9") {
+    include("io.github.spair:imgui-java-binding:${deps["imgui_java"]}")
+    implementation("io.github.spair:imgui-java-binding:${property("deps.imgui_java")}") {
         isTransitive = false
     }
 }

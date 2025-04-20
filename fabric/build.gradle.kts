@@ -19,6 +19,12 @@ base {
     archivesName.set(mod.name)
 }
 
+loom {
+    mixin {
+        defaultRefmapName.set("imguimc-refmap.json")
+    }
+}
+
 dependencies {
     minecraft("com.mojang:minecraft:$mcVersion")
     mappings(loom.officialMojangMappings())
@@ -32,6 +38,8 @@ tasks.register<Copy>("buildAndCollect") {
 }
 
 tasks.processResources {
+    from(project.project(":$mcVersion").sourceSets.main.get().resources)
+
     inputs.property("id", mod.id)
     inputs.property("name", mod.name)
     inputs.property("version", mod.version)

@@ -43,6 +43,8 @@ tasks.register<Copy>("buildAndCollect") {
 }
 
 tasks.processResources {
+    from(project.project(":$mcVersion").sourceSets.main.get().resources)
+
     inputs.property("id", mod.id)
     inputs.property("name", mod.name)
     inputs.property("version", mod.version)
@@ -62,4 +64,5 @@ tasks.processResources {
 tasks.jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(zipTree(project(":$mcVersion").tasks.jar.get().archiveFile))
+    exclude("imguimc-refmap.json")
 }
