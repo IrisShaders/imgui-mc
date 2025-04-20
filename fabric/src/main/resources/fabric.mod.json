@@ -5,7 +5,9 @@
   "name": "${name}",
   "description": "This library adds support for the latest ImGui in a compatible way, while managing all the details of contexts for you.",
   "authors": [
-    "IMS212"
+    "IMS212",
+    "asojidev",
+    "BluSpring"
   ],
   "contact": {
     "sources": "https://github.com/IrisShaders/imgui-mc"

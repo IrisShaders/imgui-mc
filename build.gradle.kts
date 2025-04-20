@@ -26,15 +26,6 @@ group = mod.group
 base { archivesName.set(mod.id) }
 
 loom {
-    splitEnvironmentSourceSets()
-
-    mods {
-        create("template") {
-            sourceSet(sourceSets["main"])
-            sourceSet(sourceSets["client"])
-        }
-    }
-
     runs {
         getByName("client") {
             environmentVariable("__GL_THREADED_OPTIMIZATIONS", "0")
@@ -81,29 +72,6 @@ java {
     val java = if (stonecutter.eval(mcVersion, ">=1.20.6")) JavaVersion.VERSION_21 else JavaVersion.VERSION_17
     targetCompatibility = java
     sourceCompatibility = java
-}
-
-tasks.processResources {
-    inputs.property("id", mod.id)
-    inputs.property("name", mod.name)
-    inputs.property("version", mod.version)
-    inputs.property("mcdep", mcDep)
-
-    val map = mapOf(
-        "id" to mod.id,
-        "name" to mod.name,
-        "version" to mod.version,
-        "mcdep" to mcDep
-    )
-
-    filesMatching("fabric.mod.json") { expand(map) }
-}
-
-tasks.register<Copy>("buildAndCollect") {
-    group = "build"
-    from(tasks.remapJar.get().archiveFile)
-    into(rootProject.layout.buildDirectory.file("libs/${mod.version}"))
-    dependsOn("build")
 }
 
 /*

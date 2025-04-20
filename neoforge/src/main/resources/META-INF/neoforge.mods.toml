@@ -1,0 +1,23 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+issueTrackerURL = "https://github.com/IrisShaders/imgui-mc/issues"
+license = "MIT"
+
+[[mods]]
+modId = "${id}"
+version = "${version}"
+displayName = "${name}"
+description = '''This library adds support for the latest ImGui in a compatible way, while managing all the details of contexts for you.'''
+authors = "IMS212, asojidev, BluSpring"
+displayURL = "https://github.com/IrisShaders/imgui-mc"
+
+[[dependencies.${id}]]
+modId = "neoforge"
+type = "required"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "${mcdep}"
