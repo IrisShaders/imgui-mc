@@ -53,6 +53,7 @@ import static org.lwjgl.opengl.GL32.GL_FRONT_AND_BACK;
 import static org.lwjgl.opengl.GL32.GL_FUNC_ADD;
 import static org.lwjgl.opengl.GL32.GL_INFO_LOG_LENGTH;
 import static org.lwjgl.opengl.GL32.GL_LINEAR;
+import static org.lwjgl.opengl.GL32.GL_NEAREST;
 import static org.lwjgl.opengl.GL32.GL_LINK_STATUS;
 import static org.lwjgl.opengl.GL32.GL_MAJOR_VERSION;
 import static org.lwjgl.opengl.GL32.GL_MINOR_VERSION;
@@ -342,7 +343,7 @@ public class ImGuiImplGl3 {
         }
 
         if (data.fontTexture == 0) {
-            createFontsTexture();
+            createFontsTexture(false);
         }
     }
 
@@ -582,7 +583,7 @@ public class ImGuiImplGl3 {
         glScissor(props.lastScissorBox[0], props.lastScissorBox[1], props.lastScissorBox[2], props.lastScissorBox[3]);
     }
 
-    public boolean createFontsTexture() {
+    public boolean createFontsTexture(boolean sharp) {
         final ImFontAtlas fontAtlas = ImGui.getIO().getFonts();
 
         // Build texture atlas
@@ -596,8 +597,8 @@ public class ImGuiImplGl3 {
         glGetIntegerv(GL_TEXTURE_BINDING_2D, lastTexture);
         data.fontTexture = glGenTextures();
         glBindTexture(GL_TEXTURE_2D, data.fontTexture);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, sharp ? GL_NEAREST : GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, sharp ? GL_NEAREST : GL_LINEAR);
         glPixelStorei(GL_UNPACK_ALIGNMENT, 4); // Not on WebGL/ES
         glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0); // Not on WebGL/ES
         glPixelStorei(GL_UNPACK_SKIP_ROWS, 0); // Not on WebGL/ES
@@ -724,7 +725,7 @@ public class ImGuiImplGl3 {
         data.vboHandle = glGenBuffers();
         data.elementsHandle = glGenBuffers();
 
-        createFontsTexture();
+        createFontsTexture(false);
 
         // Restore modified GL state
         glBindTexture(GL_TEXTURE_2D, lastTexture[0]);
