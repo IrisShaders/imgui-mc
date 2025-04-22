@@ -29,15 +29,4 @@ public class RendererInitMixin {
 		ImGuiMC.getInstance().onRendererInit(Minecraft.getInstance().getWindow().getWindow());
 	}
 	*///?}
-
-	@Inject(at = @At("RETURN"), method = "flipFrame", remap = false)
-	private static void imgui$newFrame(
-		long l,
-		//? if >= 1.21.5
-		TracyFrameCapture tracyFrameCapture,
-		CallbackInfo ci
-	) {
-		ImGuiMC.getInstance().afterPollEvents(l);
-	}
-
 }
