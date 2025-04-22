@@ -19,6 +19,13 @@ allprojects {
     }
 }
 
+subprojects {
+    if (parent == rootProject)
+        return@subprojects
+
+    apply(plugin = "java")
+}
+
 // Builds every version into `build/libs/{mod.version}/`
 stonecutter registerChiseled tasks.register("chiseledBuild", stonecutter.chiseled) {
     group = "project"
