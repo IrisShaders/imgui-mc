@@ -11,6 +11,7 @@ import imgui.flag.ImGuiBackendFlags;
 import imgui.flag.ImGuiConfigFlags;
 import imgui.flag.ImGuiViewportFlags;
 import imgui.type.ImInt;
+import net.irisshaders.imgui.ImGuiMC;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
 
@@ -56,6 +57,7 @@ import static org.lwjgl.opengl.GL32.GL_LINEAR;
 import static org.lwjgl.opengl.GL32.GL_LINK_STATUS;
 import static org.lwjgl.opengl.GL32.GL_MAJOR_VERSION;
 import static org.lwjgl.opengl.GL32.GL_MINOR_VERSION;
+import static org.lwjgl.opengl.GL32.GL_NEAREST;
 import static org.lwjgl.opengl.GL32.GL_ONE;
 import static org.lwjgl.opengl.GL32.GL_ONE_MINUS_SRC_ALPHA;
 import static org.lwjgl.opengl.GL32.GL_POLYGON_MODE;
@@ -592,12 +594,14 @@ public class ImGuiImplGl3 {
         final ImInt height = new ImInt();
         final ByteBuffer pixels = fontAtlas.getTexDataAsRGBA32(width, height);
 
+        final int texFilter = ImGuiMC.getInstance().usesSharpFont() ? GL_NEAREST : GL_LINEAR;
+
         final int[] lastTexture = new int[1];
         glGetIntegerv(GL_TEXTURE_BINDING_2D, lastTexture);
         data.fontTexture = glGenTextures();
         glBindTexture(GL_TEXTURE_2D, data.fontTexture);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, texFilter);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, texFilter);
         glPixelStorei(GL_UNPACK_ALIGNMENT, 4); // Not on WebGL/ES
         glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0); // Not on WebGL/ES
         glPixelStorei(GL_UNPACK_SKIP_ROWS, 0); // Not on WebGL/ES
