@@ -28,6 +28,7 @@ public class ImGuiMC {
     private ImGuiImplGl3 glAccessor;
     private ImGuiImplGlfw glWindow;
     private boolean drawing;
+    private boolean usesSharpFontTexture;
 
     public static ImGuiMC getInstance() {
         return INSTANCE;
@@ -51,6 +52,24 @@ public class ImGuiMC {
         ImGui.setCurrentContext(getInstance().context);
 
         return getInstance().drawing;
+    }
+
+    public boolean usesSharpFont() {
+        return this.usesSharpFontTexture;
+    }
+
+    /**
+     * Enables sharp (nearest) font rendering. Useful for Minecraft-like fonts.
+     */
+    public static void enableSharpFont() {
+        getInstance().usesSharpFontTexture = true;
+    }
+
+    /**
+     * Disables sharp (nearest) font rendering, and uses linear font rendering instead.
+     */
+    public static void disableSharpFont() {
+        getInstance().usesSharpFontTexture = false;
     }
 
     private String tryLoadFromClasspath(final String fullLibName) {
@@ -145,6 +164,7 @@ public class ImGuiMC {
         ImGui.updatePlatformWindows();
         ImGui.renderPlatformWindowsDefault();
         GLFW.glfwMakeContextCurrent(Minecraft.getInstance().getWindow().getWindow());
+        disableSharpFont();
     }
 
     private static boolean isGone;
