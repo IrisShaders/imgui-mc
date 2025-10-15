@@ -20,7 +20,7 @@ import java.util.function.BiFunction;
 @Mixin(RenderSystem.class)
 public class RendererInitMixin {
 	@Inject(at = @At("RETURN"), method = "initRenderer", remap = false)
-	//? if = 1.21.5 {
+	//? if >= 1.21.5 {
 	private static void imgui$initRenderer(long window, int i, boolean bl, BiFunction<ResourceLocation, ShaderType, String> biFunction, boolean bl2, CallbackInfo ci) {
 		ImGuiMC.getInstance().onRendererInit(window);
 	}

@@ -1,6 +1,6 @@
 package net.irisshaders.imgui;
 
-//? if =1.21.5 {
+//? if >=1.21.5 {
 import com.mojang.blaze3d.opengl.GlConst;
 import com.mojang.blaze3d.opengl.GlDevice;
 import com.mojang.blaze3d.opengl.GlStateManager;
@@ -132,7 +132,7 @@ public class ImGuiMC {
     }
 
     public void draw() {
-        //? if =1.21.5 {
+        //? if >=1.21.5 {
         GlStateManager._glBindFramebuffer(GlConst.GL_FRAMEBUFFER, ((GlTexture) Minecraft.getInstance().getMainRenderTarget().getColorTexture()).getFbo(((GlDevice) RenderSystem.getDevice()).directStateAccess(), null));
         //?} else {
         /*Minecraft.getInstance().getMainRenderTarget().bindWrite(true);
@@ -144,7 +144,11 @@ public class ImGuiMC {
 
         ImGui.updatePlatformWindows();
         ImGui.renderPlatformWindowsDefault();
+        //? if >1.21.8 {
+        /*GLFW.glfwMakeContextCurrent(Minecraft.getInstance().getWindow().handle());
+        *///?} else {
         GLFW.glfwMakeContextCurrent(Minecraft.getInstance().getWindow().getWindow());
+        //?}
     }
 
     private static boolean isGone;

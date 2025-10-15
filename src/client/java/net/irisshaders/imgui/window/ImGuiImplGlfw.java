@@ -1090,8 +1090,8 @@ public class ImGuiImplGlfw {
 
             final float mainPosX = props.monitorX[0];
             final float mainPosY = props.monitorY[0];
-            final float mainSizeX = vidMode.width();
-            final float mainSizeY = vidMode.height();
+            float mainSizeX = vidMode.width();
+            float mainSizeY = vidMode.height();
 
             float workPosX = 0;
             float workPosY = 0;
@@ -1107,6 +1107,18 @@ public class ImGuiImplGlfw {
                     workSizeX = props.monitorWorkAreaWidth[0];
                     workSizeY = props.monitorWorkAreaHeight[0];
                 }
+            }
+
+            if (mainSizeX <= 0.1 && workSizeX > 0.1) {
+                mainSizeX = workSizeX;
+            }
+
+            if (mainSizeY <= 0.1 && workSizeY > 0.1) {
+                mainSizeY = workSizeY;
+            }
+
+            if (mainSizeX < 0.1 || mainSizeY < 0.1) {
+                continue;
             }
 
             float dpiScale = 0;
