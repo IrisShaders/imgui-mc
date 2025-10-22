@@ -141,14 +141,15 @@ public class ImGuiMC {
         drawing = false;
 
         glAccessor.renderDrawData(ImGui.getDrawData());
+        GlStateManager._glBindFramebuffer(GlConst.GL_FRAMEBUFFER, 0);
 
         ImGui.updatePlatformWindows();
         ImGui.renderPlatformWindowsDefault();
         //? if >1.21.8 {
-        /*GLFW.glfwMakeContextCurrent(Minecraft.getInstance().getWindow().handle());
-        *///?} else {
-        GLFW.glfwMakeContextCurrent(Minecraft.getInstance().getWindow().getWindow());
-        //?}
+        GLFW.glfwMakeContextCurrent(Minecraft.getInstance().getWindow().handle());
+        //?} else {
+        /*GLFW.glfwMakeContextCurrent(Minecraft.getInstance().getWindow().getWindow());
+        *///?}
     }
 
     private static boolean isGone;
