@@ -215,9 +215,9 @@ public class ImGuiMC {
         glWindow.keyCallback(window, keycode, scancode, action, mods);
     }
 
-    public void recreateFonts() {
+    public void recreateFonts(boolean sharp) {
         glAccessor.destroyFontsTexture();
-        glAccessor.createFontsTexture();
+        glAccessor.createFontsTexture(sharp);
     }
 
     public void onCharTyped(long window, int chara, int j) {
